@@ -27,20 +27,23 @@ Things you may want to cover:
 ## usersテーブル
 |Column|Type|Options|
 |------|----|-------|
-|username|string|null: false|
-|email|string|null: false|
+|username|string|null: false, add_index: true|
+|email|string|null: false, unique: true|
 |password|string|null: false|
+|password confirmation|string|null: false|
 ### Association
-- has_many :group
+- has_many :groups, through: users_groups
 - has_many :messages
+- has_many :users_groups
 
 ## groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|groupname|string|null: false|
+|groupname|string|null: false, unique: true|
 ### Association
-- has_many :users
+- has_many :users, through: users_groups
 - has_many :messages
+- has_many :users_groups
 
 ## messagesテーブル
 |Column|Type|Options|
